@@ -1,9 +1,10 @@
 # Melody-Generator
 
 ## Overview
+This is implementation of Markov Chain that generates noncomplicated melody in MIDI format, based on some exemplary input.
 
 ## What is Markov Chain?
-[Markov process](https://en.wikipedia.org/wiki/Markov_chain)
+Marcov chain is mathematical system which provides as with probability of transition for one state to another. It can be characterize as memoryless proces because the next state depends only on current state and not on events which leads us to that state. --[Wikipedia](https://en.wikipedia.org/wiki/Markov_chain)
 ## Requirements
 
 ## Usage
