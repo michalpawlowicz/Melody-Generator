@@ -1,1 +1,1 @@
-# Music-Generator
+# Melody-Generator
