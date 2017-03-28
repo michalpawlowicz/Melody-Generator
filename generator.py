@@ -15,7 +15,6 @@ def parse_midi_file(path):
     for i in range(matrix_size-1):
         read_data[i] = read_data[i].split(' ')
         # time / node / velocity / beats
-        #print(i)
         node.append([string_to_number(read_data[i][0])/1000,
                         string_to_number(read_data[i][3]),
                         string_to_number(read_data[i][4]),
@@ -26,7 +25,7 @@ def create_note(time, pitch, velocity, duration):
     return [time, pitch, velocity, duration]
 
 def save_midi_file(data, name):
-    mymidi = MIDITime(200, name)
+    mymidi = MIDITime(120, name)
     midinotes = data
     mymidi.add_track(midinotes)
     mymidi.save_midi()
@@ -68,12 +67,11 @@ def index_of_closest(A, x):
 # X - probability matrix
 def next_note(X, current_note):
     rnd = random.uniform(0, max(X[current_note]))
-    # olny zeros in row
-    # return some closest note
-    if (sum(X[current_note]) < 1e-9):
-        rnd = random.randint(0, 5)
-        return current_note + rnd
-    return index_of_closest(X[current_note], rnd)
+    index = index_of_closest(X[current_note], rnd)
+    while(sum(X[index]) == 0):
+        rnd = random.uniform(0, max(X[current_note]))
+        index = index_of_closest(X[current_note], rnd)
+    return index
 
 def sum_lists(A, B):
     return [x + y for x, y in zip(A, B)]
@@ -92,19 +90,25 @@ def return_notes(X):
 
 # X - array of paths
 def learn(X):
-    matrix = [[0] * 128] * 128
+    matrix = [[0] * 128 for x in range(0, 128)]
     for x in X:
         midi_file = parse_midi_file(x)
         file_prob = probability_matrix(return_notes(midi_file))
         matrix = sum_probability_matrix(matrix, file_prob)
     return matrix
 
+def rand_start_point(X):
+     start_point = random.randint(0, 128)
+     while(sum(X[start_point]) == 0):
+         start_point = random.randint(0, 128)
+     return start_point
+
 def main():
 
     P1 = learn([
-        #"test1",
-        #"test2",
-        #"morning_moode",
+        "test1",
+        "test2",
+        "morning_moode",
         #"funeral",
         "moonlight"
     ])
@@ -112,8 +116,7 @@ def main():
 
     #print(P1)
     
-    start_point = random.randint(0, 128)
-    #start_point = 10
+    start_point = rand_start_point(P1)
     song = []
     song.append(create_note(0, start_point, 127, 2))
 
@@ -121,8 +124,11 @@ def main():
     
     nextNote = start_point
 
+    print("Starting: " + str(nextNote))
+    
     for i in range(1, 128):
         nextNote = next_note(P1, int(nextNote))
+        print("next: " + str(nextNote))
         x = create_note(i*1, nextNote, 127, 1)
         song.append(x)
    
