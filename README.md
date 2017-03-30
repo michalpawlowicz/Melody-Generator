@@ -7,6 +7,21 @@ This is implementation of Markov Chain that generates noncomplicated melody in M
 
 ## What is Markov Chain?
 Marcov chain is mathematical system which provides as with probability of transition for one state to another. It can be characterize as memoryless proces because the next state depends only on current state and not on events which leads us to that state. Read more: [Wikipedia](https://en.wikipedia.org/wiki/Markov_chain)
-## Requirements
 
 ## Usage
+
+> Git clone
+```
+git clone https://github.com/michalpawlowicz/Melody-Generator.git
+```
+> or download and unpack the zip file. 
+```
+cd Melody-Generator
+```
+> Running
+```
+python run.py output_file_name [optional arguments]
+```
+> Run ```python run.py -h ``` for more help.
+
+## Requirements
