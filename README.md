@@ -1,6 +1,6 @@
 # Melody-Generator
 
-[![build](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg)](https://github.com/michalpawlowicz/Melody-Generator)
+[![build](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)](https://github.com/michalpawlowicz/Melody-Generator)
 
 ## Overview
 This is implementation of Markov Chain that generates noncomplicated melody in MIDI format, based on some exemplary input.
