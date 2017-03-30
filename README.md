@@ -25,3 +25,5 @@ python run.py output_file_name [optional arguments]
 > Run ```python run.py -h ``` for more help.
 
 ## Requirements
+* Python 3.6
+* [miditime](https://github.com/cirlabs/miditime)
