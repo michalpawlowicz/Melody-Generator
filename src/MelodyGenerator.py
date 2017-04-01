@@ -3,6 +3,7 @@ from src.Generator import Melody_Generator
 from src.Melody import Note
 from src.Melody import Melody
 import argparse
+import os
 
 def __arg_parse():
     parser = argparse.ArgumentParser()
@@ -16,11 +17,9 @@ def __arg_parse():
 def main():
     args = __arg_parse()
     md = Melody_Generator(128, 6) # 128 notes in midi
-    md.learn(["input/test1"],
-              #"input/test2",
-              #"input/morning_moode",
-              #"input/funeral",
-              #"input/moonlight"],
+    md.learn(["seeds/morning_moode",
+              "seeds/funeral",
+              "seeds/moonlight"],
              md.notes_markov_chain)
     md.notes_markov_chain.probability_matrix_normalization()
 
@@ -36,7 +35,10 @@ def main():
         song_list.append(Note(i, next_note, 127, 2))
                  
     melody = Melody(song_list)
-    
+
+    if not os.path.exists("output"):
+        os.makedirs("output")
+
     save_midi_file(melody.return_midi_array(),
                    "output/" + args.output,
                    int(args.bpm) if args.bpm != None else 250
