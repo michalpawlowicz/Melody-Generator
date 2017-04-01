@@ -4,6 +4,7 @@ from src.Melody import Note
 from src.Melody import Melody
 import argparse
 import os
+import random
 
 def __arg_parse():
     parser = argparse.ArgumentParser()
@@ -23,6 +24,8 @@ def main():
              md.notes_markov_chain)
     md.notes_markov_chain.probability_matrix_normalization()
 
+    md.notes_markov_chain.print_probability_matrix()
+
     starting_point = Melody_Generator.random_starting_point(md.notes_markov_chain)
     md.notes_markov_chain.current_note = starting_point
 
@@ -32,7 +35,7 @@ def main():
     next_note = starting_point
     for i in range(1, 128):
         next_note = md.return_next_note()
-        song_list.append(Note(i, next_note, 127, 2))
+        song_list.append(Note(i, next_note, 127, random.randint(1, 10)))
                  
     melody = Melody(song_list)
 

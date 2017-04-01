@@ -25,7 +25,6 @@ def parse_midi_file(path):
     return Melody(node)
 
 def save_midi_file(data, name, bpm):
-    
     mymidi = MIDITime(bpm, name)
     mymidi.add_track(data) 
-    mymidi.save_midi()     
+    mymidi.save_midi()
