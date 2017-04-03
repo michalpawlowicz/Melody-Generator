@@ -15,13 +15,15 @@ def parse_midi_file(path):
     read_data = read_data.split('\n')
     matrix_size = len(read_data)
     node = []
+
     for i in range(matrix_size-1):
-        read_data[i] = read_data[i].split(' ')
         # time / node / velocity / beats
-        node.append(Note(string_to_number(read_data[i][0]) / 1000,
-                     string_to_number(read_data[i][3]),
-                     string_to_number(read_data[i][4]),
-                     string_to_number(read_data[i][2])))
+        read_data[i] = read_data[i].split(' ')
+        if len(read_data[i]) == 5 and read_data[i][1] == "On":
+            node.append(Note(string_to_number(read_data[i][0]) / 1000,
+                         string_to_number(read_data[i][3]),
+                         string_to_number(read_data[i][4]),
+                         string_to_number(read_data[i][2])))
     return Melody(node)
 
 def save_midi_file(data, name, bpm):
