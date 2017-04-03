@@ -41,3 +41,9 @@ class Melody_Generator:
         while(sum(markov_chain.probability_matrix[starting_point]) == 0):
             starting_point = random.randint(0, markov_chain.matrix_size - 1)
         return starting_point
+
+    @staticmethod
+    def check_row_if_zero(number, markov_chain: Markov_Chain):
+        if sum(markov_chain.probability_matrix[number]) == 0:
+            return -1
+        return 1

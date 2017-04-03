@@ -9,9 +9,6 @@ class Markov_Chain:
         for x, y in zip(self.probability_matrix, matrix):
             x[:] = [a + b for a, b in zip(x, y)]
             
-    # 
-    # Add comment!
-    #
     def learn(self, sequence):
         # error if sequence contains number equal or bigger self.matrix_size
         for row in range(0, self.matrix_size):
@@ -19,7 +16,7 @@ class Markov_Chain:
                 if sequence[i] == row:
                     self.probability_matrix[row][sequence[i+1]] += 1
                         
-    # Method divide every element in matrix by sum of all gitelements in row.
+    # Method divide every element in matrix by sum of all it's elements in row.
     def probability_matrix_normalization(self):
         for i in self.probability_matrix:
             s = sum(i)
