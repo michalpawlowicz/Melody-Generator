@@ -9,6 +9,7 @@ import random
 def __arg_parse():
     parser = argparse.ArgumentParser()
     parser.add_argument("output", help="Output file name")
+    parser.add_argument("length", help="number of notes")
     parser.add_argument("--bpm", help="Beats per minute")
     parser.add_argument("--seed", help="Some string")
     args = parser.parse_args()
@@ -29,7 +30,7 @@ def main():
              md.notes_markov_chain)
     md.notes_markov_chain.probability_matrix_normalization()
 
-    md.notes_markov_chain.print_probability_matrix()
+    #md.notes_markov_chain.print_probability_matrix()
 
     if args.seed is not None:
         starting_point = __hash_code(args.seed)
@@ -44,7 +45,7 @@ def main():
     song_list.append(Note(0, starting_point, 127, 2))
 
     next_note = starting_point
-    for i in range(1, 128):
+    for i in range(1, int(args.length)):
         next_note = md.return_next_note()
         song_list.append(Note(i, next_note, 127, random.randint(1, 10)))
                  
