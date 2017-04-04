@@ -55,6 +55,6 @@ def main():
         os.makedirs("output")
 
     save_midi_file(melody.return_midi_array(),
-                   "output/" + args.output,
+                   args.output,
                    int(args.bpm) if args.bpm is not None else 260
     )
