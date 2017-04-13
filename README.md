@@ -1,7 +1,5 @@
 # Melody-Generator
 
-[![build](https://img.shields.io/travis/rust-lang/rust.svg)](https://github.com/michalpawlowicz/Melody-Generator)
-
 ## Overview
 This is implementation of Markov Chain that generates noncomplicated melody in MIDI format, based on some exemplary input.
 
